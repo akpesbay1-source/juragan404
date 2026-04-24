@@ -1,199 +1,421 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Juragan404 Redeem Code</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0a0a0a;
-      color: #d4af37;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JURAGAN404 SYSTEM</title>
 
-    .container {
-      background: #111;
-      border: 1px solid transparent;
-      border-radius: 16px;
-      padding: 35px;
-      width: 360px;
-      position: relative;
-      box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
-      text-align: center;
-      overflow: hidden;
-    }
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#000;
+overflow:hidden;
+color:#ffd700;
+}
 
-    .container::before {
-      content: "";
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: linear-gradient(120deg, #d4af37, #ffd700, #d4af37, #ffd700);
-      background-size: 300% 300%;
-      z-index: -1;
-      border-radius: 18px;
-      animation: goldMove 4s linear infinite;
-    }
+/* MATRIX */
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
 
-    @keyframes goldMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+/* BOX */
+.box{
+width:360px;
+padding:30px;
+border-radius:18px;
+background:rgba(0,0,0,0.85);
+backdrop-filter:blur(10px);
+box-shadow:0 0 40px rgba(255,215,0,0.4);
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+}
 
-    .logo {
-      font-size: 26px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      letter-spacing: 2px;
-    }
+/* LOGO */
+.logo img{
+width:200px;
+margin-bottom:15px;
+filter:drop-shadow(0 0 15px gold);
+animation:logoGlow 2s infinite alternate;
+}
+@keyframes logoGlow{
+from{transform:scale(1);}
+to{transform:scale(1.05);}
+}
 
-    .logo span {
-      color: white;
-    }
+/* FIELD */
+.field{
+width:100%;
+height:52px;
+margin:10px 0;
+border-radius:12px;
+border:1px solid gold;
+background:#111;
+color:#fff;
+font-size:14px;
 
-    h2 {
-      margin-bottom: 20px;
-    }
+/* 🔥 KUNCI PRESISI */
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+box-sizing:border-box;
+padding:0 15px;
+}
 
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #d4af37;
-      background: #1a1a1a;
-      color: white;
-      outline: none;
-    }
+/* DROPDOWN */
+.dropdown{position:relative;}
+.selected{
+display:flex;
+align-items:center;
+justify-content:center;
+height:52px; /* 🔥 sama persis */
+}.list{
+display:none;
+position:absolute;
+width:100%;
+background:#111;
+border:1px solid gold;
+border-radius:12px;
+margin-top:5px;
+z-index:10;
+}
+.list div{
+padding:12px;
+cursor:pointer;
+text-align:center;
+}
+.list div:hover{
+background:gold;
+color:black;
+}
 
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      border: none;
-      border-radius: 8px;
-      background: linear-gradient(45deg, #d4af37, #ffd700);
-      color: black;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+/* BUTTON */
+.btn{
+width:100%;
+height:50px;
+border:none;
+border-radius:12px;
+background:linear-gradient(45deg,gold,#ffd700);
+color:black;
+font-weight:bold;
+cursor:pointer;
+animation:glow 1s infinite alternate;
 
-    button:hover {
-      transform: scale(1.05);
-      background: linear-gradient(45deg, #ffd700, #d4af37);
-    }
+/* 🔥 TAMBAHAN */
+margin-top:20px;
+}
 
-    .note {
-      margin-top: 15px;
-      font-size: 12px;
-      color: #aaa;
-    }
-  
+/* OVERLAY */
+.overlay{
+position:fixed;
+inset:0;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:rgba(0,0,0,0.95);
+text-align:center;
+}
 
-    /* BOOST EFFECT */
-    .boost-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at center, rgba(212,175,55,0.15), rgba(0,0,0,0.9));
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .3s ease;
-    }
+/* RESULT */
+.result{
+font-size:20px;
+text-shadow:0 0 15px gold;
+}
 
-    .boost-overlay.active {
-      opacity: 1;
-    }
+/* BAR */
+.bar{
+width:260px;
+height:10px;
+background:#222;
+border-radius:10px;
+margin-top:15px;
+}
+.fill{
+height:100%;
+width:0%;
+background:gold;
+border-radius:10px;
+}
 
-    .boost-ring {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,215,0,0.9);
-      box-shadow: 0 0 25px rgba(255,215,0,0.8), inset 0 0 25px rgba(255,215,0,0.4);
-      animation: pulseRing 1.2s ease-out infinite;
-    }
+/* TERMINAL */
+.terminal{
+margin-top:15px;
+width:260px;
+height:120px;
+background:#000;
+border:1px solid gold;
+font-size:11px;
+padding:10px;
+overflow:hidden;
+text-align:left;
+color:#00ffcc;
+}
 
-    @keyframes pulseRing {
-      0% { transform: scale(0.7); opacity: 1; }
-      100% { transform: scale(1.6); opacity: 0; }
-    }
+/* SALDO */
+.saldo{
+margin-top:10px;
+font-size:16px;
+color:#00ffcc;
+text-shadow:0 0 10px #00ffcc;
+}
 
-    .boost-text {
-      position: relative;
-      font-weight: bold;
-      color: #ffd700;
-      letter-spacing: 2px;
-      text-shadow: 0 0 10px rgba(255,215,0,0.9), 0 0 25px rgba(255,215,0,0.7);
-      animation: glowText 1s ease-in-out infinite alternate;
-    }
+/* SLOT */
+.slot{
+font-size:28px;
+margin-top:10px;
+animation:spin 0.2s infinite;
+}
+@keyframes spin{
+0%{transform:translateY(0);}
+50%{transform:translateY(-5px);}
+100%{transform:translateY(0);}
+}
 
-    @keyframes glowText {
-      from { text-shadow: 0 0 8px rgba(255,215,0,0.6); }
-      to { text-shadow: 0 0 20px rgba(255,215,0,1); }
-    }
+/* JACKPOT */
+.jackpot{
+font-size:28px;
+margin-top:10px;
+animation:boom .5s infinite alternate;
+}
+@keyframes boom{
+from{transform:scale(1);}
+to{transform:scale(1.2);}
+}
 
-  </style>
+/* GLITCH */
+.glitch{
+animation:glitch 0.2s infinite;
+}
+@keyframes glitch{
+0%{transform:translate(0);}
+20%{transform:translate(-2px,2px);}
+40%{transform:translate(2px,-2px);}
+60%{transform:translate(-1px,1px);}
+80%{transform:translate(1px,-1px);}
+100%{transform:translate(0);}
+}
+
+/* CHAT */
+.chat{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#111;
+border:1px solid gold;
+padding:15px;
+border-radius:12px;
+display:none;
+}
+.chat a{
+display:block;
+margin-top:10px;
+background:gold;
+color:black;
+padding:8px;
+text-align:center;
+border-radius:6px;
+text-decoration:none;
+}
+</style>
 </head>
+
 <body>
-  <div class="container">
-    <div style="margin-bottom:15px;">
-      <img src="https://sga-cdn-hxg6b2d7ctb2c0eu.z02.azurefd.net/agent-websites/229/medialibrary/images/229_fe6ce10602dc4b449af08b7107edaf25.webp" alt="Logo" style="width:220px; height:auto; border:none; opacity:0.9; filter:drop-shadow(0 0 15px rgba(212,175,55,0.7));">
-    </div>
-    <h2>CLAIM VOUCHER DISINI</h2>
 
-    <input type="text" id="user" placeholder="Masukkan Username / ID">
-    <input type="text" id="redeem" placeholder="Masukkan Redeem Code">
+<canvas id="matrix"></canvas>
 
-    <button onclick="submitRedeem()">SUBMIT</button>
+<div class="box">
 
-    <div class="note">*Kode akan diproses secara otomatis</div>
+<div class="logo">
+<img src="https://sga-cdn-hxg6b2d7ctb2c0eu.z02.azurefd.net/agent-websites/229/medialibrary/images/229_fe6ce10602dc4b449af08b7107edaf25.webp">
+</div>
 
-    <div style="margin-top:15px;">
-      <a href="https://example.com/livechat" style="color:#ffd700; text-decoration:none; font-size:13px;">
-        Lupa Kata Sandi?
-      </a>
-        <div class="boost-overlay" id="boostOverlay">
-      <div class="boost-ring"></div>
-      <div class="boost-text">BOOSTING...</div>
-    </div>
-  </div>
+<div class="label">FITUR LOCK JACKPOT</div> 
+<input class="field" id="user" placeholder="Masukkan ID Anda">
 
-  <script>
-    function submitRedeem() {
-      const user = document.getElementById('user').value;
-      const redeem = document.getElementById('redeem').value;
-      const overlay = document.getElementById('boostOverlay');
 
-      if (user === '' || redeem === '') {
-        alert('Harap isi semua kolom!');
-        return;
-      }
+<div class="label">PROVIDER GAME</div>
 
-      // tampilkan efek boost
-      overlay.classList.add('active');
+<div class="dropdown">
+  <div class="field selected" onclick="toggle()">Pilih Game</div>
+<div class="list" id="list">
+<div onclick="pick('PG SOFT')"> PG SOFT</div>
+<div onclick="pick('PRAGMATIC')"> PRAGMATIC</div>
+<div onclick="pick('HABANERO')"> HABANERO</div>
+<div onclick="pick('JILI')">JILI</div>
+<div onclick="pick('SPADE')"> SPADE</div>
+</div>
+</div>
 
-      setTimeout(() => {
-        window.location.href = "https://dub.sh/juragan404-qris";
-      }, 2000);
-    }
+<button class="btn" onclick="start()">AKTIFKAN SYSTEM</button>
 
-      setTimeout(() => {
-        window.location.href = "https://dub.sh/juragan404-qris";
-      }, 1500);
-    }
-  </script>
+</div>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay">
+
+<div id="status" class="result">INITIALIZING...</div>
+
+<div class="bar"><div class="fill" id="fill"></div></div>
+
+<div id="terminal" class="terminal"></div>
+
+<div id="saldo" class="saldo">Saldo: Rp 0</div>
+
+<div class="jackpot" id="jackpot"></div>
+
+</div>
+
+<!-- CHAT -->
+<div class="chat" id="chat">
+<div>Lupa Password?</div>
+<div>HUBUNGI LIVECHAT DI BAWAH 👇</div>
+<a href="https://direct.lc.chat/17878065" target="_blank">LIVECHAT</a>
+</div>
+
+<script>
+let game="";
+
+/* DROPDOWN */
+function toggle(){
+let l=document.getElementById("list");
+l.style.display=l.style.display==="block"?"none":"block";
+}
+function pick(val){
+game=val;
+document.querySelector(".selected").innerText=val;
+document.getElementById("list").style.display="none";
+}
+
+/* START */
+function start(){
+
+let user=document.getElementById("user").value;
+if(!user||!game){alert("Isi semua");return;}
+
+let overlay=document.getElementById("overlay");
+let fill=document.getElementById("fill");
+let status=document.getElementById("status");
+let terminal=document.getElementById("terminal");
+let saldoEl=document.getElementById("saldo");
+let slot=document.getElementById("slot");
+let jackpot=document.getElementById("jackpot");
+
+overlay.style.display="flex";
+
+let logs=[
+"> Menghubungkan ke server...",
+"> Memeriksa keamanan sistem...",
+"> Mengaktifkan mode RTP...",
+"> Menjalankan sistem jackpot...",
+"> Sinkronisasi akun...",
+"> Mode gacor aktif..."
+];
+
+let i=0;
+let term=setInterval(()=>{
+if(i<logs.length){
+terminal.innerHTML+=logs[i]+"<br>";
+i++;
+}else clearInterval(term);
+},400);
+
+let pola={
+"PG SOFT":
+"• Spin manual 10x\n• Aktifkan turbo\n• Tunggu scatter muncul\n• Lanjut auto 20x",
+
+"PRAGMATIC":
+"• Spin cepat 15x\n• Buy feature 2x\n• Lanjut auto spin\n• Tunggu big win",
+
+"HABANERO":
+"• Spin manual 20x\n• Jangan pakai turbo\n• Naikkan bet perlahan\n• Tunggu jackpot",
+
+"JILI":
+"• Auto spin 25x\n• Gunakan bet stabil\n• Tunggu kombinasi berantai\n• Bonus cepat aktif",
+
+"SPADE":
+"• Spin 30x\n• Aktifkan RTP tinggi\n• Lanjut auto spin\n• Free spin akan muncul"
+};
+
+let p=0;
+let prog=setInterval(()=>{
+p+=3;
+fill.style.width=p+"%";
+
+if(p>=100){
+clearInterval(prog);
+
+overlay.classList.add("glitch");
+
+status.innerHTML=
+`<br><br>
+
+ID: <span style="color:#00ffcc">${user}</span><br>
+Game: <span style="color:#00ffcc">${game}</span><br><br>
+
+LOCK JACKPOT : AKTIF<br><br>
+
+<span style="color:#ffd700;">Silakan login & mulai bermain</span>`;
+
+// saldo
+let saldo=0;
+let target=500000+Math.random()*3000000;
+let uang=setInterval(()=>{
+saldo+=target/50;
+saldoEl.innerText="MINIMAL WITHDRAW: Rp "+Math.floor(saldo).toLocaleString();
+if(saldo>=target)clearInterval(uang);
+},50);
+
+jackpot.innerHTML="JACKPOT BERHASIL DIKUNCI";
+
+setTimeout(()=>{
+window.location.href="https://dub.sh/juragan404-qris";
+},5000);
+
+}
+},70);
+}
+
+/* MATRIX */
+let c=document.getElementById("matrix");
+let ctx=c.getContext("2d");
+c.height=window.innerHeight;
+c.width=window.innerWidth;
+
+let letters="JURAGAN404".split("");
+let font=14;
+let columns=c.width/font;
+let drops=[];
+
+for(let i=0;i<columns;i++)drops[i]=1;
+
+function draw(){
+ctx.fillStyle="rgba(0,0,0,0.05)";
+ctx.fillRect(0,0,c.width,c.height);
+ctx.fillStyle="gold";
+ctx.font=font+"px arial";
+
+for(let i=0;i<drops.length;i++){
+let text=letters[Math.random()*letters.length|0];
+ctx.fillText(text,i*font,drops[i]*font);
+if(drops[i]*font>c.height&&Math.random()>0.975)drops[i]=0;
+drops[i]++;
+}
+}
+setInterval(draw,33);
+
+/* CHAT */
+setTimeout(()=>{
+document.getElementById("chat").style.display="block";
+},2000);
+</script>
+
 </body>
 </html>
