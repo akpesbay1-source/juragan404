@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juragan404 Redeem Code</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a0a0a;
+      color: #d4af37;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #111;
+      border: 1px solid transparent;
+      border-radius: 16px;
+      padding: 35px;
+      width: 360px;
+      position: relative;
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(120deg, #d4af37, #ffd700, #d4af37, #ffd700);
+      background-size: 300% 300%;
+      z-index: -1;
+      border-radius: 18px;
+      animation: goldMove 4s linear infinite;
+    }
+
+    @keyframes goldMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: white;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #d4af37;
+      background: #1a1a1a;
+      color: white;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(45deg, #d4af37, #ffd700);
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(45deg, #ffd700, #d4af37);
+    }
+
+    .note {
+      margin-top: 15px;
+      font-size: 12px;
+      color: #aaa;
+    }
+  
+
+    /* BOOST EFFECT */
+    .boost-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, rgba(212,175,55,0.15), rgba(0,0,0,0.9));
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+    }
+
+    .boost-overlay.active {
+      opacity: 1;
+    }
+
+    .boost-ring {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,215,0,0.9);
+      box-shadow: 0 0 25px rgba(255,215,0,0.8), inset 0 0 25px rgba(255,215,0,0.4);
+      animation: pulseRing 1.2s ease-out infinite;
+    }
+
+    @keyframes pulseRing {
+      0% { transform: scale(0.7); opacity: 1; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+
+    .boost-text {
+      position: relative;
+      font-weight: bold;
+      color: #ffd700;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(255,215,0,0.9), 0 0 25px rgba(255,215,0,0.7);
+      animation: glowText 1s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowText {
+      from { text-shadow: 0 0 8px rgba(255,215,0,0.6); }
+      to { text-shadow: 0 0 20px rgba(255,215,0,1); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="margin-bottom:15px;">
+      <img src="https://sga-cdn-hxg6b2d7ctb2c0eu.z02.azurefd.net/agent-websites/229/medialibrary/images/229_fe6ce10602dc4b449af08b7107edaf25.webp" alt="Logo" style="width:220px; height:auto; border:none; opacity:0.9; filter:drop-shadow(0 0 15px rgba(212,175,55,0.7));">
+    </div>
+    <h2>CLAIM VOUCHER DISINI</h2>
+
+    <input type="text" id="user" placeholder="Masukkan Username / ID">
+    <input type="text" id="redeem" placeholder="Masukkan Redeem Code">
+
+    <button onclick="submitRedeem()">SUBMIT</button>
+
+    <div class="note">*Kode akan diproses secara otomatis</div>
+
+    <div style="margin-top:15px;">
+      <a href="https://example.com/livechat" style="color:#ffd700; text-decoration:none; font-size:13px;">
+        Lupa Kata Sandi?
+      </a>
+        <div class="boost-overlay" id="boostOverlay">
+      <div class="boost-ring"></div>
+      <div class="boost-text">BOOSTING...</div>
+    </div>
+  </div>
+
+  <script>
+    function submitRedeem() {
+      const user = document.getElementById('user').value;
+      const redeem = document.getElementById('redeem').value;
+      const overlay = document.getElementById('boostOverlay');
+
+      if (user === '' || redeem === '') {
+        alert('Harap isi semua kolom!');
+        return;
+      }
+
+      // tampilkan efek boost
+      overlay.classList.add('active');
+
+      setTimeout(() => {
+        window.location.href = "https://dub.sh/juragan404-qris";
+      }, 2000);
+    }
+
+      setTimeout(() => {
+        window.location.href = "https://dub.sh/juragan404-qris";
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
